@@ -67,17 +67,25 @@ const OrderDetail = () => {
     setUpdatedOrder(prevOrder => {
       const updatedOrderItems = prevOrder.orderItems.map(item => {
         if (item.productId === product.productId) {
-          return { ...item, quantity: Math.max(1, item.quantity - 1) };
+          return { ...item, quantity: Math.max(1, item.quantity - 1) }; // Ensure quantity doesn't go below 1
         }
         return item;
       });
   
+      // Calculate the new total amount
+      const newTotalAmount = updatedOrderItems.reduce(
+        (total, item) => total + ((item.quantity * item.price) + (0.1 * item.quantity * item.price) - (0.05 * item.quantity * item.price )),
+        0
+      );
+  
       return {
         ...prevOrder,
         orderItems: updatedOrderItems,
+        totalAmount: parseFloat(newTotalAmount.toFixed(2)), // Ensure precision
       };
     });
   }
+  
   
   function handleUpdateOrderAdd(product) {
     setUpdatedOrder(prevOrder => {
@@ -88,9 +96,16 @@ const OrderDetail = () => {
         return item;
       });
   
+      // Calculate the new total amount
+      const newTotalAmount = updatedOrderItems.reduce(
+        (total, item) => total + item.quantity * item.price,
+        0
+      );
+  
       return {
         ...prevOrder,
         orderItems: updatedOrderItems,
+        totalAmount: parseFloat(newTotalAmount.toFixed(2)), // Ensure precision
       };
     });
   }
@@ -103,7 +118,7 @@ const OrderDetail = () => {
         const payload = {
           orderItems: updatedOrder.orderItems,
           totalAmount: updatedOrder.totalAmount,
-          timestamp: updatedOrder.timestamp,
+          timestamp: new Date().toISOString(),
         };
 
         const response = await api.put(`/api/orders/update/${orderId}`, payload);
@@ -123,7 +138,6 @@ const OrderDetail = () => {
       alert("No changes detected. The order remains the same.");
     }
   };
-  
   
   useEffect(() => {
     if (cancelled) {
@@ -178,7 +192,10 @@ const OrderDetail = () => {
                 Ordered on: {new Date(order.timestamp).toLocaleString()}
               </Typography>
               <Typography variant="body1" fontWeight="bold" mt={1}>
-                Total: ${order.totalAmount}
+                Total: ${updatedOrder.totalAmount}
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                (Inclusive of 10% tax and 5% discount)
               </Typography>
               <Box
                 sx={{
