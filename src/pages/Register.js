@@ -35,28 +35,36 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setError(null);
 
-    try {
-      // Make API request for registration
-      const response = await api.post('/api/register', formData);
-      const { token, status, message } = response.data;
+  // Password validation
+  if (formData.password.length < 6 || formData.password.length > 19) {
+    setError('Password must be between 6 and 19 characters.');
+    setLoading(false);
+    return;
+  }
 
-      if (status === 'SUCCESS') {
-        localStorage.setItem('token', token);
-        navigate('/products');  // Redirect to /products after successful registration
-      } else {
-        setError(message);
-      }
-    } catch (err) {
-      setError(err.response?.data?.message || 'An error occurred');
-    } finally {
-      setLoading(false);
+  try {
+    // Make API request for registration
+    const response = await api.post('/api/register', formData);
+    const { token, status, message } = response.data;
+
+    if (status === 'SUCCESS') {
+      localStorage.setItem('token', token);
+      navigate('/products'); // Redirect to /products after successful registration
+    } else {
+      setError(message);
     }
-  };
+  } catch (err) {
+    setError(err.response?.data?.message || 'An error occurred');
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <>
