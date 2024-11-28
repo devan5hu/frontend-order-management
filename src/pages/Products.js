@@ -93,7 +93,7 @@ const Products = () => {
         <Slider {...carouselSettings}>
           <div>
             <CustomSlider
-              image="https://preview.colorlib.com/theme/shopmax/images/model_4.png.webp"
+              image="https://preview.colorlib.com/theme/shopmax/images/model_3.png.webp"
               text="Explore Our Collection"
               buttonText="Shop Now"
               buttonLink="/products"
@@ -101,7 +101,7 @@ const Products = () => {
           </div>
           <div>
             <CustomSlider
-              image="https://preview.colorlib.com/theme/shopmax/images/model_3.png.webp"
+              image="https://preview.colorlib.com/theme/shopmax/images/model_4.png.webp"
               text="Discover New Trends"
               buttonText="Browse More"
               buttonLink="/products"
