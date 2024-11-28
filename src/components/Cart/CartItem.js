@@ -1,6 +1,10 @@
 import React from 'react';
 import { ListItem, Box, Typography, IconButton } from '@mui/material';
 import { Link } from 'react-router-dom';
+import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
+import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 const CartItem = ({ product, onRemove, onQuantityChange }) => {
   const totalPrice = (product.quantity * product.price).toFixed(2);
@@ -65,16 +69,7 @@ const CartItem = ({ product, onRemove, onQuantityChange }) => {
           }}
           sx={{ padding: 0 }}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18" 
-            height="18" 
-            fill="currentColor"
-            className="bi bi-trash"
-            viewBox="0 0 16 16"
-          >
-            <path d="M5.5 0a.5.5 0 0 1 .5.5V1h5V.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h1V.5a.5.5 0 0 1 .5-.5h3zM3 2v11a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2H3z" />
-          </svg>
+        <DeleteIcon/>
         </IconButton>
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
@@ -89,17 +84,7 @@ const CartItem = ({ product, onRemove, onQuantityChange }) => {
               fontSize: '20px',
             }}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              fill="currentColor"
-              className="bi bi-dash-circle"
-              viewBox="0 0 16 16"
-            >
-              <path d="M8 6a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 1 0V6a.5.5 0 0 0-.5-.5z" />
-              <path d="M16 8a8 8 0 1 1-16 0 8 8 0 0 1 16 0z" />
-            </svg>
+          <RemoveRoundedIcon />
           </IconButton>
           <Typography variant="body2" sx={{ fontSize: '16px' }}>
             {product.quantity}
@@ -115,17 +100,7 @@ const CartItem = ({ product, onRemove, onQuantityChange }) => {
               fontSize: '20px', 
             }}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              fill="currentColor"
-              className="bi bi-plus-circle"
-              viewBox="0 0 16 16"
-            >
-              <path d="M8 6a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 1 0V6a.5.5 0 0 0-.5-.5z" />
-              <path d="M16 8a8 8 0 1 1-16 0 8 8 0 0 1 16 0z" />
-            </svg>
+            <AddIcon />
           </IconButton>
         </Box>
 

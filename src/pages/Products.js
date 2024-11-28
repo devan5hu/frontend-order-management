@@ -89,7 +89,7 @@ const Products = () => {
         isLoggedIn={true}
         cartCount={Object.values(cart).reduce((total, count) => total + count, 0)}
       />
-      <Box sx={{ my: 3, maxHeight: '400px', overflow: 'hidden' }}>
+      <Box sx={{ my: 3, maxHeight: '600px', overflow: 'hidden', height: '750px' }}>
         <Slider {...carouselSettings}>
           <div>
             <CustomSlider
@@ -109,7 +109,7 @@ const Products = () => {
           </div>
           <div>
             <CustomSlider
-              image="https://via.placeholder.com/1200x400"
+              image="https://preview.colorlib.com/theme/shopmax/images/model_4.png.webp"
               text="Exclusive Offers"
               buttonText="Get Started"
               buttonLink="/offers"
